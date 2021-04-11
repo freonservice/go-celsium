@@ -3,7 +3,7 @@ Library for easy named formatting translations
 
 ### Documentation
 
-All named parameters are stored in next format:
+All translations with named parameters are stored in next format:
 
 `Hello, {name}, how are you?`
 
