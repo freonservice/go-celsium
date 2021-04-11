@@ -10,7 +10,6 @@ import (
 func TestSprintfSuccessful(t *testing.T) {
 	{ // Successful case where len(params) == len(IdentifierNamedList)
 		text, err := Format(&api.Translation{
-			IdentifierName:      "hello_message",
 			Text:                "this {number} {name}",
 			IdentifierNamedList: []string{"number", "name"},
 		}, map[string]string{
@@ -23,7 +22,6 @@ func TestSprintfSuccessful(t *testing.T) {
 
 	{ // Successful case where len(params) == len(IdentifierNamedList) and repeated named parameters
 		text, err := Format(&api.Translation{
-			IdentifierName:      "hello_message",
 			Text:                "this {number} {number} {name}",
 			IdentifierNamedList: []string{"number", "name"},
 		}, map[string]string{
@@ -38,7 +36,6 @@ func TestSprintfSuccessful(t *testing.T) {
 	// This bad situation but this case must be validated on backend and frontend not in client app.
 	{
 		text, err := Format(&api.Translation{
-			IdentifierName:      "hello_message",
 			Text:                "this",
 			IdentifierNamedList: []string{"number", "name"},
 		}, map[string]string{
@@ -47,6 +44,14 @@ func TestSprintfSuccessful(t *testing.T) {
 		})
 		assert.Nil(t, err)
 		assert.Equal(t, "this", text)
+	}
+
+	{ // Successful case with empty params
+		text, err := Format(&api.Translation{
+			Text: "just text",
+		}, nil)
+		assert.Nil(t, err)
+		assert.Equal(t, "just text", text)
 	}
 }
 
