@@ -53,7 +53,6 @@ func TestSprintfSuccessful(t *testing.T) {
 func TestSprintfFailure(t *testing.T) {
 	{
 		_, err := Format(&api.Translation{
-			IdentifierName:      "hello_message",
 			Text:                "this {number} {name}",
 			IdentifierNamedList: []string{"number"},
 		}, map[string]string{
@@ -66,7 +65,6 @@ func TestSprintfFailure(t *testing.T) {
 
 	{
 		_, err := Format(&api.Translation{
-			IdentifierName:      "hello_message",
 			Text:                "this {number} {name}",
 			IdentifierNamedList: []string{"number", "name"},
 		}, map[string]string{
@@ -75,5 +73,4 @@ func TestSprintfFailure(t *testing.T) {
 		assert.NotNil(t, err)
 		assert.Equal(t, ErrNotValidParams, err)
 	}
-
 }
